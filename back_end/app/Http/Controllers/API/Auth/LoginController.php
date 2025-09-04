@@ -16,15 +16,16 @@ class LoginController extends Controller
         ]);
 
         if (!Auth::attempt($credentials)) {
-            return response()->json(['message' => 'Invalid credentials'], 401);
+            return response()->json(['error' => 'Email ou mot de passe incorrect'], 401);
         }
 
         $user = Auth::user();
         $token = $user->createToken('api-token')->plainTextToken;
 
         return response()->json([
-            'user' => $user,
             'token' => $token,
+            'user' => $user,
+            'role'=>$user->getRoleNames()
         ]);
     }
 }

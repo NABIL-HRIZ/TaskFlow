@@ -1,0 +1,61 @@
+
+.user-card {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+
+}
+
+.user-profile {
+  background-color: #f8f9fa;
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  transition: transform 0.2s;
+  cursor: pointer;
+
+}
+
+.user-profile:hover {
+  transform: translateY(-5px);
+}
+
+.user-avatar {
+  width:50px;
+  height:50px;
+  background-color:rgb(76, 76, 181);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.user-info h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #333;
+}
+
+.user-info p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.user-role {
+  display: inline-block;
+  margin-top: 5px;
+  font-size: 12px;
+  background-color: #e2e3ff;
+  color: #6c63ff;
+  padding: 3px 8px;
+  border-radius: 8px;
+}
+

@@ -1,0 +1,23 @@
+.admin-dashboard-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.dashboard-main-content {
+  flex: 1;
+  margin-left: 250px; 
+  padding: 20px;
+}
+
+.users-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.users-table th,
+.users-table td {
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+
