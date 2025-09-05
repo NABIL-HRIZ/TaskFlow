@@ -7,6 +7,8 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\API\Auth\LoginController;
 use App\Http\Controllers\API\Auth\AdminController;
+use App\Http\Controllers\API\Auth\TaskController;
+
 
 
 Route::middleware('auth:sanctum')->group(function () {
@@ -32,4 +34,9 @@ Route::post('/login', [LoginController::class, 'login']);
 
 // task 
 
-Route::middleware('auth:sanctum')->post('/tasks', [TaskController::class, 'store']);
+Route::middleware('auth:sanctum','role:admin')->group(function () {
+    Route::get('/tasks', [TaskController::class, 'getTasks']);
+    Route::post('/tasks', [TaskController::class, 'store']);
+});
+
+

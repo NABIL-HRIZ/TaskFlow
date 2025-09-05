@@ -44,10 +44,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function assignedFromUser(){
+    public function assignedTo(){
         return $this->hasMany(Task::class,'assigned_to');
     }
-    public function createdByUser(){
+    public function createdBy(){
         return $this->hasMany(Task::class,'created_by');
     }
 }

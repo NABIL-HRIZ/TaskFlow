@@ -21,13 +21,12 @@ class Task extends Model
 
      // une tâche est assignée à un user.
      
-    public function assignedUser(){
-        return $this->belongsTo(User::class,'assigned_to');
-    }
-
+   public function assignedTo(){
+    return $this->belongsTo(User::class,'assigned_to');
+}
     //une tâche est créée par un user (admin).
    
-    public function creator(){
-        return $this->belongsTo(User::class,'created_at');
-    }
+   public function createdBy(){
+    return $this->belongsTo(User::class, 'created_by');
+}
 }
