@@ -37,6 +37,10 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::middleware('auth:sanctum','role:admin')->group(function () {
     Route::get('/tasks', [TaskController::class, 'getTasks']);
     Route::post('/tasks', [TaskController::class, 'store']);
+    Route::get('/tasks/{id}', [TaskController::class, 'getTask']);
+    Route::put('/task/{id}', [TaskController::class, 'updateTask']);
+    Route::delete('/task/{id}',[TaskController::class, 'deleteTask']);
 });
+
 
 

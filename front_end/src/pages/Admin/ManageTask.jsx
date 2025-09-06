@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import AdminLayout from "./AdminLayout";
 import axios from "axios";
 import "../../styles/ManageTask.css";
+import { Link } from "react-router-dom";
 
 const ManageTask = () => {
   const [tasks, setTasks] = useState([]);
@@ -106,7 +107,8 @@ const ManageTask = () => {
         ) : (
           <div className="task-grid">
             {filteredTasks.map((task) => (
-              <div key={task.id} className="task-card">
+               <Link key={task.id} to={`/task-details/${task.id}`}  style={{textDecoration:'none'}}>
+ <div key={task.id} className="task-card">
                 <div className={`priority-bar ${getPriorityClass(task.priority)}`}></div>
                 
                 <div className="task-card-header">
@@ -156,6 +158,8 @@ const ManageTask = () => {
                   </div>
                 </div>
               </div>
+                </Link>
+             
             ))}
           </div>
         )}

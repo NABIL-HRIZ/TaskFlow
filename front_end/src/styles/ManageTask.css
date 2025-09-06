@@ -35,9 +35,7 @@
   transition: all 0.2s;
 }
 
-.filter-controls button:hover {
-  background: #f7fafc;
-}
+
 
 .filter-controls button.active {
   background:#5f997c;
@@ -86,11 +84,11 @@
 }
 
 .priority-high {
- background: #0a9845;
+ background: #035b28;
 }
 
 .priority-medium {
-  background: #b9cf94;
+  background: #84b039;
 }
 
 .priority-low {
@@ -182,7 +180,7 @@
 
 .task-card-footer {
   padding: 12px 20px;
-  background: #f7fafc;
+  background: #eaf8de;
   border-top: 1px solid #e2e8f0;
 }
 

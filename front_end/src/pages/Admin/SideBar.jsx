@@ -4,7 +4,11 @@ import axios from "axios";
 import "../../styles/Sidebar.css";
 
 const Sidebar = () => {
-  const [admin, setAdmin] = useState(null);
+  const [admin, setAdmin] = useState({
+    name:'',
+    email:'',
+    role:'user',
+  });
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -50,7 +54,6 @@ const handleLogout = async () => {
     <div className="sidebar">
       <h2 className="sidebar-logo">TaskFlow</h2>
 
-      {admin && (
         <div className="admin-profile">
           <div className="admin-avatar">
             {admin.name.charAt(0).toUpperCase()}
@@ -61,7 +64,7 @@ const handleLogout = async () => {
             <span className="admin-role">{admin.role}</span>
           </div>
         </div>
-      )}
+      
 
       <ul className="sidebar-links">
         <li>

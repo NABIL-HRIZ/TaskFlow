@@ -8,6 +8,7 @@ import TeamMembers from './pages/Admin/TeamMembers';
 import CreateTask from './pages/Admin/CreateTask';
 import UserDetails from './pages/Admin/UserDetails';
 import ManageTask from './pages/Admin/ManageTask';
+import TaskDetails from './pages/Admin/TaskDetails';
 
 
 const App = () => {
@@ -20,10 +21,12 @@ const App = () => {
       <Route path='/users-dashboard' element={<UsersDashboard />} />
       <Route path='/admin-dashboard' element={<AdminDashboard />} />
         <Route path="/team-members" element={<TeamMembers />} />
-        <Route path='/create-task' element={<CreateTask />} />
-        <Route path='/manage-tasks' element={<ManageTask />} />
-
         <Route path='/user-infos/:id' element={<UserDetails />} />
+
+         <Route path='/create-task' element={<CreateTask />} />
+        <Route path='/manage-tasks' element={<ManageTask />} />
+        <Route path='/task-details/:id' element={<TaskDetails />} />
+
 
 
 
