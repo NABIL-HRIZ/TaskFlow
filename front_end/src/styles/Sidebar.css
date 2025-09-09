@@ -68,6 +68,12 @@
   margin: 0;
 }
 
+.sidebar-links li a.active-link {
+  background-color: #C6D870; 
+  color: #000;
+}
+
+
 .sidebar-links li {
   margin-bottom: 15px;
 }
@@ -82,10 +88,6 @@
   transition: all 0.2s ease;
 }
 
-.sidebar-links li a:hover {
-  background-color: #C6D870;
-  color: #000;
-}
 
 .sidebar-logout {
   background-color: #e74c3c;
@@ -98,6 +100,3 @@
   transition:all 0.2s ease;
 }
 
-.sidebar-logout:hover {
-  background-color: #c0392b;
-}

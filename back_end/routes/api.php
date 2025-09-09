@@ -8,7 +8,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\API\Auth\LoginController;
 use App\Http\Controllers\API\Auth\AdminController;
 use App\Http\Controllers\API\Auth\TaskController;
-
+use App\Http\Controllers\API\Auth\UserController;
 
 
 Route::middleware('auth:sanctum')->group(function () {
@@ -40,7 +40,21 @@ Route::middleware('auth:sanctum','role:admin')->group(function () {
     Route::get('/tasks/{id}', [TaskController::class, 'getTask']);
     Route::put('/task/{id}', [TaskController::class, 'updateTask']);
     Route::delete('/task/{id}',[TaskController::class, 'deleteTask']);
+    Route::get('/last-tasks', [TaskController::class, 'getLastTasks']);
+
 });
 
+//user
+
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/user', [UserController::class, 'profile']);
+    Route::get('/my-tasks', [UserController::class, 'myTasks']);
+    Route::get('/my-tasks/{id}', [UserController::class, 'myTask']);
+    Route::put('/my-tasks/{id}', [UserController::class, 'updateMyTask']); 
+    Route::delete('/my-tasks/{id}', [UserController::class, 'deleteMyTask']); 
+    Route::get('/all-users', [UserController::class, 'allUsers']);
+    Route::post('/tasks', [TaskController::class, 'store']);
+});
 
 

@@ -49,19 +49,17 @@
 }
 
 .update-btn {
-  background: #3498db;
+  background: #8FA31E;
   color: #fff;
   padding: 12px 24px;
   border: none;
   border-radius: 10px;
   font-size: 1rem;
   cursor: pointer;
-  transition: background 0.3s ease;
+ 
 }
 
-.update-btn:hover {
-  background: #2980b9;
-}
+
 
 .delete-btn {
   background: #e74c3c;
@@ -71,9 +69,7 @@
   border-radius: 10px;
   font-size: 1rem;
   cursor: pointer;
-  transition: background 0.3s ease;
+  
 }
 
-.delete-btn:hover {
-  background: #c0392b;
-}
+

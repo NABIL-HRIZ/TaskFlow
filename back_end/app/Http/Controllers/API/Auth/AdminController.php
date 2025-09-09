@@ -23,6 +23,7 @@ class AdminController extends Controller
        
       $users = User::role('user')
     ->with('roles')
+     ->orderBy('created_at', 'desc')
     ->get()
     ->map(function ($user) {
         return [

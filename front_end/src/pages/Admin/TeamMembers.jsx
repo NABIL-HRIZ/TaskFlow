@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 const TeamMembers = () => {
   const [users, setUsers] = useState([]);
   const [newUser, setNewUser] = useState({ name: "", email: "", password: "", password_confirmation: "" });
-
+  const [tasks,setTasks]=useState([]);
  const [show, setShow] = useState(false);
    const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -77,12 +77,40 @@ const handleCreateUser = async (e) => {
 };
 
 
+// statue de chaque user
+
+  useEffect(() => {
+    const fetchTasks = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const res = await axios.get("http://127.0.0.1:8000/api/my-tasks", {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      setTasks(res.data.tasks);
+      } catch (err) {
+        console.error("Error fetching tasks:", err.response?.data || err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTasks();
+  }, []);
+
+
+
+  
+  const todoTasks = tasks.filter(task => task.status === 'todo').length;
+  const inProgressTasks = tasks.filter(task => task.status === 'in_progress').length;
+  const doneTasks = tasks.filter(task => task.status === 'done').length;
+
+
   return (
 
     <AdminLayout>
  <div>
        <h1>Team Members</h1>
-        <Button variant="primary" onClick={handleShow}>
+        <Button  onClick={handleShow} style={{backgroundColor:'#BF9264',marginLeft:"800px"}}>
         Create new user
       </Button>
 
@@ -160,7 +188,7 @@ const handleCreateUser = async (e) => {
     <Button variant="secondary" onClick={handleClose}>
       Close
     </Button>
-    <Button variant="primary" onClick={handleCreateUser}>
+    <Button  onClick={handleCreateUser} style={{backgroundColor:'#8FA31E'}}>
       Save User
     </Button>
   </Modal.Footer>
@@ -177,6 +205,9 @@ const handleCreateUser = async (e) => {
             <h3>{u.name}</h3>
             <p>{u.email}</p>
             <span className="user-role">{u.role}</span>
+            <span>todo : {todoTasks}</span>
+            <span>in progress : {inProgressTasks}</span>
+            <span>Completed : {doneTasks}</span>
 
      
 

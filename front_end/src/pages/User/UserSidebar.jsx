@@ -1,30 +1,31 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "../../styles/Sidebar.css";
 
-const Sidebar = () => {
-  const [admin, setAdmin] = useState({
-    name:'',
+
+const UserSidebar = () => {
+  const [user, setUser] = useState({
+    name:"",
     email:'',
-    role:'user',
+   
+    
   });
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchAdmin = async () => {
+    useEffect(() => {
+    const fetchUser = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await axios.get("http://127.0.0.1:8000/api/admin", {
-          headers: { Authorization: `Bearer ${token}` },
+        const res = await axios.get("http://127.0.0.1:8000/api/user", {
+          headers: { Authorization: `Bearer ${token}` }
         });
-        setAdmin(res.data.admin);
+        setUser(res.data.user);
       } catch (err) {
-        console.error(err);
+        console.error("Error fetching user:", err);
       }
     };
 
-    fetchAdmin();
+    fetchUser();
   }, []);
 
 const handleLogout = async () => {
@@ -56,12 +57,11 @@ const handleLogout = async () => {
 
         <div className="admin-profile">
           <div className="admin-avatar">
-            {admin.name.charAt(0).toUpperCase()}
+            {user?.name.charAt(0).toUpperCase()}
           </div>
           <div className="admin-info">
-            <h3>{admin.name}</h3>
-            <p>{admin.email}</p>
-            <span className="admin-role">{admin.role}</span>
+            <h3>{user?.name}</h3>
+            <p>{user?.email}</p>
           </div>
         </div>
       
@@ -69,7 +69,7 @@ const handleLogout = async () => {
     <ul className="sidebar-links">
   <li>
     <NavLink 
-      to="/admin-dashboard"
+      to="/users-dashboard"
       className={({ isActive }) => isActive ? "active-link" : ""}
     >
       Dashboard
@@ -77,28 +77,23 @@ const handleLogout = async () => {
   </li>
   <li>
     <NavLink 
-      to="/manage-tasks"
+      to="/my-tasks"
       className={({ isActive }) => isActive ? "active-link" : ""}
     >
-      Manage Tasks
+      My Tasks
     </NavLink>
   </li>
+
   <li>
     <NavLink 
-      to="/create-task"
+      to="/create-user-task"
       className={({ isActive }) => isActive ? "active-link" : ""}
     >
       Create Task
     </NavLink>
   </li>
-  <li>
-    <NavLink 
-      to="/team-members"
-      className={({ isActive }) => isActive ? "active-link" : ""}
-    >
-      Team Members
-    </NavLink>
-  </li>
+
+
 </ul>
 
 
@@ -109,4 +104,4 @@ const handleLogout = async () => {
   );
 };
 
-export default Sidebar;
+export default UserSidebar;

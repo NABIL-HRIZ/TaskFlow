@@ -20,6 +20,7 @@ class LoginController extends Controller
         }
 
         $user = Auth::user();
+        // Créer token Sanctum
         $token = $user->createToken('api-token')->plainTextToken;
 
         return response()->json([

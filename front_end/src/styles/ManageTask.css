@@ -84,16 +84,17 @@
 }
 
 .priority-high {
- background: #035b28;
+ background: #6e4c03;
+ color: #fff !important;
 }
 
 .priority-medium {
-  background: #84b039;
+  background: #deb626;
 }
 
 .priority-low {
   
-   background: #d7ed88e0;
+   background: #f3e48ce0;
 }
 
 .task-card-header {
@@ -122,18 +123,18 @@
 }
 
 .status-todo {
-  background:#DEE791;
+  background:#d8e758;
   color: #201f1f;
 }
 
 .status-in-progress {
-  background: #FFF9BD;
+  background: #78c782;
   color: #2a2929;
 }
 
 .status-done {
-  background: #c6f6d5;
-  color: #2f855a;
+  background: #03541d;
+  color: #dce5e0;
 }
 
 .priority-badge {

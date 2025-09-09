@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import AdminLayout from "./AdminLayout";
+import UserLayout from "./UserLayout";
 import axios from "axios";
-import "../../styles/AdminDashboard.css";
 import { FaArrowsTurnToDots } from 'react-icons/fa6';
 import { RiProgress1Fill } from 'react-icons/ri';
 import { MdDoneOutline } from 'react-icons/md';
@@ -9,23 +8,22 @@ import { FaTasks } from 'react-icons/fa';
 import { Cell, Pie, PieChart, ResponsiveContainer, Legend,
  BarChart, Bar, Rectangle, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 
-const AdminDashboard = () => {
-  const [admin, setAdmin] = useState({
+const UserDashboard = () => {
+  const [user, setUser] = useState({
     name: ''
   });
   const [today, setToday] = useState("");
   const [tasks, setTasks] = useState([]);
-  const [last_tasks, setLastTasks] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchAdmin = async () => {
+    const fetchUser = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await axios.get("http://127.0.0.1:8000/api/admin", {
-          headers: { Authorization: `Bearer ${token}` },
+         const res = await axios.get("http://127.0.0.1:8000/api/user", {
+          headers: { Authorization: `Bearer ${token}` }
         });
-        setAdmin(res.data.admin);
+        setUser(res.data.user);
       } catch (err) {
         console.error(err);
       }
@@ -38,17 +36,17 @@ const AdminDashboard = () => {
       year: "numeric",
     });
     setToday(currentDate);
-    fetchAdmin();
+    fetchUser();
   }, []);
 
   useEffect(() => {
     const fetchTasks = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await axios.get("http://127.0.0.1:8000/api/tasks", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        setTasks(res.data.tasks);
+        const res = await axios.get("http://127.0.0.1:8000/api/my-tasks", {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      setTasks(res.data.tasks);
       } catch (err) {
         console.error("Error fetching tasks:", err.response?.data || err);
       } finally {
@@ -59,23 +57,7 @@ const AdminDashboard = () => {
     fetchTasks();
   }, []);
 
-  useEffect(() => {
-    const fetchlast_Tasks = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        const res = await axios.get("http://127.0.0.1:8000/api/last-tasks", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        setLastTasks(res.data.last_tasks);
-      } catch (err) {
-        console.error("Error fetching tasks:", err.response?.data || err);
-      } finally {
-        setLoading(false);
-      }
-    };
 
-    fetchlast_Tasks();
-  }, []);
 
   const totalTasks = tasks.length;
   const todoTasks = tasks.filter(task => task.status === 'todo').length;
@@ -143,21 +125,21 @@ const AdminDashboard = () => {
 
   if (loading) {
     return (
-      <AdminLayout>
+      <UserLayout>
         <div className="dashboard-loading">
           <div className="loading-spinner"></div>
           <p>Loading dashboard...</p>
         </div>
-      </AdminLayout>
+      </UserLayout>
     );
   }
 
   return (
-    <AdminLayout>
+    <UserLayout>
       <div className="admin-dashboard">
         <div className="dashboard-header">
           <div>
-            <h1 className="admin-greeting">Good Morning, {admin.name}</h1>
+            <h1 className="admin-greeting">Good Morning, {user.name}</h1>
             <p className="current-date">{today}</p>
           </div>
         </div>
@@ -251,50 +233,10 @@ const AdminDashboard = () => {
           </div>
         </div>
 
-        <div className="recent-tasks-container">
-          <div className="recent-tasks-header">
-            <h3>Recent Tasks</h3>
-          </div>
-          <div className="recent-tasks-table-container">
-            <table className="recent-tasks-table">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Status</th>
-                  <th>Priority</th>
-                  <th>Created At</th>
-                </tr>
-              </thead>
-              <tbody>
-               {last_tasks.map(last_task => (
-                  <tr key={last_task.id} className="task-row">
-                    <td className="task-title">{last_task.title}</td>
-                    <td>
-                      <span className={`status-badge ${getStatusClass(last_task.status)}`}>
-                        {last_task.status}
-                      </span>
-                    </td>
-                    <td>
-                      <span className={`priority-badge ${getPriorityClass(last_task.priority)}`}>
-                        {last_task.priority}
-                      </span>
-                    </td>
-                    <td className="task-date">
-                      {new Date(last_task.created_at).toLocaleDateString("fr-FR", {
-                        day: "numeric",
-                        month: "long",
-                        year: "numeric",
-                      })}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
+       
       </div>
-    </AdminLayout>
+    </UserLayout>
   );
 }; 
 
-export default AdminDashboard;
+export default UserDashboard;

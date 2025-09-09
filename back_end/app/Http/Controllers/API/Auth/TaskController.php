@@ -38,7 +38,7 @@ class TaskController extends Controller
 
     public function getTasks(){
 
-        $tasks = Task::with(['assignedTo', 'createdBy'])->get();
+        $tasks = Task::with(['assignedTo', 'createdBy']) ->orderBy('created_at', 'desc')->get();
 
         return response()->json([
             'tasks' => $tasks,
@@ -88,6 +88,14 @@ class TaskController extends Controller
     $task->delete();
 
     return response()->json(['message' => 'Task deleted successfully']);
+}
+
+public function getLastTasks(){
+    $last_tasks = Task::with(['assignedTo', 'createdBy'])->orderBy('created_at', 'desc') ->take(5)->get();
+
+        return response()->json([
+            'last_tasks' => $last_tasks,
+        ]);
 }
 
 }

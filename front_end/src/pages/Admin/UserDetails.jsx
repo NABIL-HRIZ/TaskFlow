@@ -79,6 +79,9 @@ const UserDetails = () => {
   return (
     <AdminLayout>
       <div className="user-details-container">
+         <button className="back-button" onClick={() => navigate('/team-members')}>
+            &larr; Back to Users
+          </button>
         <h2>Edit User</h2>
         <div className="user-edit-form">
           <div className="form-group">
