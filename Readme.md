@@ -38,7 +38,7 @@ Le projet comprend :
 
 ## ⚙️ Stack technique
 
-- **Backend** : Laravel 10, Eloquent, MySQL
+- **Backend** : Laravel 10, Eloquent, MailTrap
 - **Auth** : Laravel Breeze (API, tokens)
 - **Frontend** : React, Axios, React Router, react-toastify,SweetAlertJs
 - **Outils** : Postman, Git/GitHub
@@ -78,6 +78,10 @@ npm install
 # Configurer API URL si nécessaire
 
 npm start
+
+## Emails & Mailtrap
+
+This project uses Mailtrap for email testing in the development environment.
 
 ## Démonstration — scénario recommandé
 
