@@ -13,37 +13,38 @@ use Illuminate\Http\JsonResponse;
 
 class AdminController extends Controller
 {
-    public function getDashboard(Request $request)
-    {
-        $admin = $request->user();
+   public function getDashboard(Request $request)
+{
+    $admin = $request->user();
 
-        
-        $adminRole = $admin->getRoleNames()->first() ?? 'user';
+    // Determine admin's main role (prioritize 'admin')
+    $roles = $admin->getRoleNames(); // collection of roles
+    $adminRole = $roles->contains('admin') ? 'admin' : $roles->first();
 
-       
-      $users = User::role('user')
-    ->with('roles')
-     ->orderBy('created_at', 'desc')
-    ->get()
-    ->map(function ($user) {
-        return [
+    // Get all users with role 'user' and their first role
+    $users = User::role('user')
+        ->with('roles')
+        ->orderBy('created_at', 'desc')
+        ->get()
+        ->map(fn($user) => [
             'id' => $user->id,
             'name' => $user->name,
             'email' => $user->email,
-            'role' => $user->getRoleNames()->first() ?? 'user',
-        ];
-    });
-
-        return response()->json([
-            'admin' => [
-                'id' => $admin->id,
-                'name' => $admin->name,
-                'email' => $admin->email,
-                'role' => $adminRole,
-            ],
-            'users' => $users,
+            'role' => $user->getRoleNames()->first(), // usually 'user'
         ]);
-    }
+
+    // Return admin info and users
+    return response()->json([
+        'admin' => [
+            'id' => $admin->id,
+            'name' => $admin->name,
+            'email' => $admin->email,
+            'role' => $adminRole,
+        ],
+        'users' => $users,
+    ]);
+}
+
 
    public function deleteUser($id)
 {
@@ -91,7 +92,7 @@ public function storeUser(Request $request): JsonResponse
             'id' => $user->id,
             'name' => $user->name,
             'email' => $user->email,
-            'role' => $user->getRoleNames()->first() ?? 'user',
+            'role' => $user->getRoleNames()->first(),
         ]
     ]);
 }
@@ -117,4 +118,11 @@ public function updateUser(Request $request, $id)
 
     return response()->json(['message' => 'User updated successfully', 'user' => $user]);
 }
+
+   
+
+
+
+
+
 }

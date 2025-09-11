@@ -45,9 +45,9 @@ const Register = () => {
 
     try {
     const res = await axios.post('http://127.0.0.1:8000/api/register', values);
-    localStorage.setItem('token', res.data.token);
+   
     localStorage.setItem('role', res.data.role[0]);
-      toast.success('Inscription réussie !', {
+      toast.success('Inscription réussie !', { 
         position: "top-left",
         autoClose: 3000,
         hideProgressBar: false,
@@ -143,7 +143,7 @@ const Register = () => {
              
             </div>
 
-   <button class="btn-17" type="submit">
+   <button class="btn-17" type="submit"  style={{left:"40px"}}>
   <span class="text-container">
     <span class="text">S'incrire</span>
   </span>

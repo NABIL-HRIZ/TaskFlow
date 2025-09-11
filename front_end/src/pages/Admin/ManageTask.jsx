@@ -131,13 +131,11 @@ const ManageTask = () => {
                   <div className="assigned-users">
                     <h4>Assigned to:</h4>
                     <div className="user-tags">
-                      {task.assigned_to ? (
+                     
                         <span className="user-tag">
                           {task.assigned_to.name}
                         </span>
-                      ) : (
-                        <span className="user-tag unassigned">Unassigned</span>
-                      )}
+                     
                     </div>
                   </div>
                 </div>

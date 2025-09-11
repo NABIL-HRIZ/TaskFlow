@@ -9,6 +9,7 @@ const Sidebar = () => {
     email:'',
     role:'user',
   });
+  
   const navigate = useNavigate();
 
   useEffect(() => {

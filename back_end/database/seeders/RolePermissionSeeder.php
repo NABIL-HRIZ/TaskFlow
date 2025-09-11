@@ -15,14 +15,16 @@ class RolePermissionSeeder extends Seeder
     public function run(): void
     {
         $permissions = [
-        'view tasks',
-        'update task status',
-        'view profile',
+        'view users',
+        'create users',
+        'update users',
+        'delete users',
+        'view all tasks',
+        'view personnel tasks',
         'create task',
         'edit task',
         'delete task',
-        'assign task',
-        'manage users',
+        
     ];
 
      foreach ($permissions as $permission) {
@@ -35,7 +37,12 @@ class RolePermissionSeeder extends Seeder
 
     
       // User Permissions
-    $userRole->givePermissionTo(['view tasks', 'update task status', 'view profile']);
+    $userRole->givePermissionTo([ 
+        'create task',
+        'edit task',
+        'delete task',
+      'view personnel tasks',
+]);
 
     // Admin Permissions
     $adminRole->givePermissionTo(Permission::all());

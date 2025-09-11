@@ -35,14 +35,17 @@ class RegisteredUserController extends Controller
         // Assign default role "user"
         $user->assignRole('user');
 
+        
+        //L’événement Registered dans Laravel
+        //Il sert surtout pour email verification si User implémente MustVerifyEmail.
         event(new Registered($user));
 
         Auth::login($user);
 
-         $token = $user->createToken('auth_token')->plainTextToken;
+        
+       
 
        return response()->json([
-    'token' => $token,
     'user'  => $user,
     'role'  => $user->getRoleNames(),
 ]);

@@ -66,37 +66,11 @@ const handleCreateUser = async (e) => {
       swal("Something went wrong!", { icon: "error" });
     }
   } catch (err) {
-    if (err.response?.status === 422) {
-      const messages = Object.values(err.response.data.errors || {}).flat();
-      swal("Validation Error", messages.join("\n"), "error");
-    } else {
       console.error(err.response?.data || err);
-      swal("Failed to create user", { icon: "error" });
+      swal("email has already ! ", { icon: "error" });
     }
-  }
+  
 };
-
-
-// statue de chaque user
-
-  useEffect(() => {
-    const fetchTasks = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        const res = await axios.get("http://127.0.0.1:8000/api/my-tasks", {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      setTasks(res.data.tasks);
-      } catch (err) {
-        console.error("Error fetching tasks:", err.response?.data || err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchTasks();
-  }, []);
-
 
 
   
@@ -205,9 +179,7 @@ const handleCreateUser = async (e) => {
             <h3>{u.name}</h3>
             <p>{u.email}</p>
             <span className="user-role">{u.role}</span>
-            <span>todo : {todoTasks}</span>
-            <span>in progress : {inProgressTasks}</span>
-            <span>Completed : {doneTasks}</span>
+           
 
      
 

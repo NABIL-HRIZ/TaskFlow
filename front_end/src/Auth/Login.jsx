@@ -72,6 +72,8 @@ if (role === "admin") {
       
       <div className="login-container">
 
+        
+
         <div className="form-side">
           <h2>Connexion</h2>
           <p>Entrez vos identifiants pour continuer ! </p>
@@ -116,6 +118,13 @@ if (role === "admin") {
 </button>
 
           </form>
+          <div className="forget-password" style={{marginTop:"20px"}}>
+            <Link to='/forget-password' style={{textDecoration:'none'}}> 
+            forget password ? 
+
+            </Link>
+
+          </div>
 
           <div className="signup-link">
             Pas de compte ? <Link to="/register">Inscrivez-vous maintenant</Link>

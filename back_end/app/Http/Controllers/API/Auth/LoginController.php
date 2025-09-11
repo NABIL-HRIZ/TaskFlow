@@ -17,9 +17,10 @@ class LoginController extends Controller
 
         if (!Auth::attempt($credentials)) {
             return response()->json(['error' => 'Email ou mot de passe incorrect'], 401);
-        }
+        } 
 
         $user = Auth::user();
+        
         // Créer token Sanctum
         $token = $user->createToken('api-token')->plainTextToken;
 
@@ -29,4 +30,18 @@ class LoginController extends Controller
             'role'=>$user->getRoleNames()
         ]);
     }
+
+    public function logout(Request $request)
+{
+    // delete current token only (recommended)
+    $request->user()->currentAccessToken()->delete();
+
+    // أو: delete all tokens of the user
+    // $request->user()->tokens()->delete();
+
+    return response()->json([
+        'message' => 'Successfully logged out'
+    ]);
+}
+
 }
